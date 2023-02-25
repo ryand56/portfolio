@@ -70,14 +70,6 @@ const initCanvas = (canvas: HTMLCanvasElement, color?: string[]) => {
             ]),
         }));
 
-    canvas.addEventListener("click", () => {
-        noiseGen = mkSimplexNoise(Math.random);
-    });
-    
-    window.addEventListener("resize", () => {
-        setupCanvas(canvas);
-    });
-
     draw(ctx, canvas, particles, 0);
 };
 
@@ -89,8 +81,27 @@ interface FlowFieldProps {
 const FlowField = ({ style, color }: FlowFieldProps) => {
     const canvas = React.useRef<HTMLCanvasElement>(null) as React.MutableRefObject<HTMLCanvasElement>;
     
+    const canvasOnClick = () => {
+        noiseGen = mkSimplexNoise(Math.random);
+    };
+    
+    const windowResize = () => {
+        setupCanvas(canvas.current);
+    };
+
     React.useEffect(() => {
-        if (canvas.current) initCanvas(canvas.current, color);
+        if (canvas.current) {
+            initCanvas(canvas.current, color);
+            canvas.current.addEventListener("click", canvasOnClick);
+            window.addEventListener("resize", windowResize);
+        }
+
+        return () => {
+            if (canvas.current) {
+                canvas.current.removeEventListener("click", canvasOnClick);
+                window.removeEventListener("resize", windowResize);
+            }
+        };
     }, [canvas]);
 
     return <canvas ref={canvas} style={style} />;

@@ -74,11 +74,12 @@ const initCanvas = (canvas: HTMLCanvasElement, color?: string[]) => {
 };
 
 interface FlowFieldProps {
-    style?: React.CSSProperties
-    color?: string[]
+    style?: React.CSSProperties;
+    className?: string;
+    color?: string[];
 };
 
-const FlowField = ({ style, color }: FlowFieldProps) => {
+const FlowField = ({ style, className, color }: FlowFieldProps) => {
     const canvas = React.useRef<HTMLCanvasElement>(null) as React.MutableRefObject<HTMLCanvasElement>;
     
     const canvasOnClick = () => {
@@ -104,7 +105,7 @@ const FlowField = ({ style, color }: FlowFieldProps) => {
         };
     }, [canvas]);
 
-    return <canvas ref={canvas} style={style} />;
+    return <canvas ref={canvas} style={style} className={className} />;
 };
 
 export default FlowField;

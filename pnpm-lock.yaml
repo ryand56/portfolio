@@ -1,4 +1,8 @@
-lockfileVersion: '6.0'
+lockfileVersion: '6.1'
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
 
 dependencies:
   '@spissvinkel/simplex-noise':
@@ -19,6 +23,9 @@ dependencies:
   react-icons:
     specifier: ^4.9.0
     version: 4.9.0(react@18.2.0)
+  scroll-snap:
+    specifier: ^4.0.3
+    version: 4.0.3
   use-lanyard:
     specifier: ^1.4.2
     version: 1.4.2
@@ -766,6 +773,10 @@ packages:
     resolution: {integrity: sha512-CtuThmgHNg7zIZWAXi3AsyIzA3n4xx7aNyjwC2VJldO2LMVDhFK+63xGqq6CsJH4rTAt6/M+N4GhZiDYPx9eUw==}
     dependencies:
       loose-envify: 1.4.0
+    dev: false
+
+  /scroll-snap@4.0.3:
+    resolution: {integrity: sha512-7am2JXqY/0jHN9+3b2zhZtm55NmzEQhZTXZBIdC/fVb6aVN5nonjbRpf+OghU9LhguJB+rq5ty9SmQcYzMvMxw==}
     dev: false
 
   /source-map-js@1.0.2:

@@ -108,7 +108,7 @@ const FlowField = ({ style, className, color }: FlowFieldProps) => {
         };
     }, [canvas]);
 
-    return <div ref={canvasHolder} id="flow-field-background" className="min-w-full max-w-full min-h-full max-h-full">
+    return <div ref={canvasHolder} id="flow-field-background" className="absolute left-0 top-0 min-w-full max-w-full min-h-full max-h-full">
         <canvas ref={canvas} style={style} className={className} />
     </div>;
 };

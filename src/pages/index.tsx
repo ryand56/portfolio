@@ -1,15 +1,22 @@
-import { useEffect } from "react";
+import { FaAngleDown } from "react-icons/fa";
 import { usePresenceContext } from "../context/Lanyard";
+import IntroSection from "../components/IntroSection";
+import Section from "../components/Section";
+import Link from "next/link";
 
 const Home = () => {
     const data = usePresenceContext();
 
     return (
-        <div className="m-4 mb-14 md:m-14 flex flex-col absolute bottom-0">
-            <h1 className="font-bold md:leading-tight text-3xl md:text-6xl">
-                Hey, I'm Ryan👋
-            </h1>
-        </div>
+        <>
+            <div id="section-list">
+                <IntroSection />
+                <Section title="Hello World!" />
+            </div>
+            <Link href="">
+                <FaAngleDown className="text-3xl absolute left-1/2 bottom-3 animate-bounce-slow" />
+            </Link>
+        </>
     );
 };
 

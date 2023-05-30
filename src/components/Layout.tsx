@@ -7,7 +7,7 @@ interface LayoutProps {
     children: React.ReactNode;
 }
 
-const Layout = ({ children }: LayoutProps) => (
+const Layout = ({ children }: LayoutProps) => ( // top-0 left-0 right-0 bottom-0
     <>
         <Head>
             <meta charSet="UTF-8" />
@@ -23,8 +23,8 @@ const Layout = ({ children }: LayoutProps) => (
             <meta name="author" content="Ryan Omasta" />
         </Head>
         <PresenceContextProvider>
+            <FlowField className="absolute -z-20 w-full h-full block" />
             <div>
-                <FlowField className="absolute -z-20 top-0 left-0 right-0 bottom-0 w-full h-full" />
                 {children}
             </div>
         </PresenceContextProvider>

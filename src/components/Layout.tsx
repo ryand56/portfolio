@@ -7,7 +7,7 @@ interface LayoutProps {
     children: React.ReactNode;
 }
 
-const Layout = ({ children }: LayoutProps) => ( // top-0 left-0 right-0 bottom-0
+const Layout = ({ children }: LayoutProps) => (
     <>
         <Head>
             <meta charSet="UTF-8" />

@@ -5,6 +5,10 @@ interface SectionProps {
 }
 
 const Section = ({ title, content, children }: SectionProps) => (
-    <div className="h-screen w-full flex flex-col relative">{title}</div>
+    <div className="min-w-full max-w-full">
+        <div className="min-w-full max-w-full ml-auto mr-auto text-center absolute left-0 right-0">
+            {title}
+        </div>
+    </div>
 );
 export default Section;

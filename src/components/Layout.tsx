@@ -22,11 +22,9 @@ const Layout = ({ children }: LayoutProps) => ( // top-0 left-0 right-0 bottom-0
             <meta name="description" content="Ryan Omasta - Software/Web Developer" />
             <meta name="author" content="Ryan Omasta" />
         </Head>
+        <FlowField className="fixed -z-20 w-full h-full" />
         <PresenceContextProvider>
-            <FlowField className="absolute -z-20 w-full h-full block" />
-            <div>
-                {children}
-            </div>
+            {children}
         </PresenceContextProvider>
     </>
 );

@@ -80,6 +80,7 @@ interface FlowFieldProps {
 };
 
 const FlowField = ({ style, className, color }: FlowFieldProps) => {
+    const canvasHolder = React.useRef<HTMLDivElement>(null) as React.MutableRefObject<HTMLDivElement>;
     const canvas = React.useRef<HTMLCanvasElement>(null) as React.MutableRefObject<HTMLCanvasElement>;
     
     const canvasOnClick = () => {
@@ -91,21 +92,25 @@ const FlowField = ({ style, className, color }: FlowFieldProps) => {
     };
 
     React.useEffect(() => {
-        if (canvas.current) {
+        if (canvasHolder.current && canvas.current) {
             initCanvas(canvas.current, color);
+            canvasHolder.current.addEventListener("click", canvasOnClick);
             canvas.current.addEventListener("click", canvasOnClick);
             window.addEventListener("resize", windowResize);
         }
 
         return () => {
-            if (canvas.current) {
+            if (canvasHolder.current && canvas.current) {
+                canvasHolder.current.removeEventListener("click", canvasOnClick);
                 canvas.current.removeEventListener("click", canvasOnClick);
                 window.removeEventListener("resize", windowResize);
             }
         };
     }, [canvas]);
 
-    return <canvas ref={canvas} style={style} className={className} />;
+    return <div ref={canvasHolder} id="flow-field-background" className="min-w-full max-w-full min-h-full max-h-full">
+        <canvas ref={canvas} style={style} className={className} />
+    </div>;
 };
 
 export default FlowField;

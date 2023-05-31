@@ -1,7 +1,6 @@
 import * as React from "react";
 import { point, setupCanvas } from "../util/canvas";
 import { randomInt, TAU, randomElement } from "../util/math";
-import useRandomInterval from "../util/random";
 import { mkSimplexNoise, SimplexNoise } from "@spissvinkel/simplex-noise";
 
 // Inspired from https://github.com/FyraLabs/homepage to make a component version

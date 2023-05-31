@@ -1,14 +1,13 @@
 interface SectionProps {
+    id: string;
     title: string;
     content?: string;
     children?: React.ReactNode; // Extras
 }
 
-const Section = ({ title, content, children }: SectionProps) => (
-    <div className="min-w-full max-w-full snap-center">
-        <div className="min-w-full max-w-full ml-auto mr-auto text-center absolute left-0 right-0">
-            {title}
-        </div>
+const Section = ({ id, title, content, children }: SectionProps) => (
+    <div id={id} className="flex relative min-h-screen h-screen w-screen justify-center items-center">
+        <div>{title}</div>
     </div>
 );
 export default Section;

@@ -68,9 +68,7 @@ const Home = () => {
                 className="flex flex-col absolute top-0 left-0 h-screen w-screen overflow-x-hidden"
             >
                 <IntroSection />
-                <div className="flex relative min-h-screen h-screen w-screen justify-center items-center">
-                    Hello 2
-                </div>
+                <Section id="about" title="About" />
             </div>
         </>
     );

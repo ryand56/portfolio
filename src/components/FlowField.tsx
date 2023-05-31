@@ -1,6 +1,7 @@
 import * as React from "react";
 import { point, setupCanvas } from "../util/canvas";
 import { randomInt, TAU, randomElement } from "../util/math";
+import useRandomInterval from "../util/random";
 import { mkSimplexNoise, SimplexNoise } from "@spissvinkel/simplex-noise";
 
 // Inspired from https://github.com/FyraLabs/homepage to make a component version
@@ -73,6 +74,8 @@ const initCanvas = (canvas: HTMLCanvasElement, color?: string[]) => {
     draw(ctx, canvas, particles, 0);
 };
 
+const random = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min;
+
 interface FlowFieldProps {
     style?: React.CSSProperties;
     className?: string;
@@ -82,8 +85,9 @@ interface FlowFieldProps {
 const FlowField = ({ style, className, color }: FlowFieldProps) => {
     const canvasHolder = React.useRef<HTMLDivElement>(null) as React.MutableRefObject<HTMLDivElement>;
     const canvas = React.useRef<HTMLCanvasElement>(null) as React.MutableRefObject<HTMLCanvasElement>;
-    
-    const canvasOnClick = () => {
+    const tickTimeoutId = React.useRef<number | undefined>(undefined);
+
+    const canvasNoise = () => {
         noiseGen = mkSimplexNoise(Math.random);
     };
     
@@ -91,18 +95,30 @@ const FlowField = ({ style, className, color }: FlowFieldProps) => {
         setupCanvas(canvas.current);
     };
 
+    const handleTick = () => {
+        const nextTickAt = random(6000, 8000);
+        tickTimeoutId.current = window.setTimeout(() => {
+            canvasNoise();
+            handleTick();
+        }, nextTickAt);
+    };
+
     React.useEffect(() => {
         if (canvasHolder.current && canvas.current) {
             initCanvas(canvas.current, color);
-            canvasHolder.current.addEventListener("click", canvasOnClick);
-            canvas.current.addEventListener("click", canvasOnClick);
+            canvasHolder.current.addEventListener("click", canvasNoise);
+            canvas.current.addEventListener("click", canvasNoise);
+            handleTick();
+
             window.addEventListener("resize", windowResize);
         }
 
         return () => {
             if (canvasHolder.current && canvas.current) {
-                canvasHolder.current.removeEventListener("click", canvasOnClick);
-                canvas.current.removeEventListener("click", canvasOnClick);
+                canvasHolder.current.removeEventListener("click", canvasNoise);
+                canvas.current.removeEventListener("click", canvasNoise);
+                clearTimeout(tickTimeoutId.current);
+
                 window.removeEventListener("resize", windowResize);
             }
         };

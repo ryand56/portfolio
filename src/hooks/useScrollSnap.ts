@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { linear } from "../util/easing";
 import createScrollSnap from "scroll-snap";
 
 export interface ScrollSnapSettings {

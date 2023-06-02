@@ -1,10 +1,11 @@
-import { useRef, useEffect } from "react";
+import { useRef, createRef, useEffect, useCallback, MouseEventHandler } from "react";
 import { usePresenceContext } from "../context/Lanyard";
 import IntroSection from "../components/IntroSection";
 import Section from "../components/Section";
 import Link from "next/link";
 import { FaAngleDown } from "react-icons/fa";
 import useScrollSnap from "../hooks/useScrollSnap";
+import { easeOutQuint } from "../util/easing";
 
 /* return (
         false ? <>
@@ -22,43 +23,31 @@ import useScrollSnap from "../hooks/useScrollSnap";
 const Home = () => {
     const data = usePresenceContext();
 
+    const sections = ["About"];
+    const sectionRefs = useRef<HTMLDivElement[]>([]);
+    sectionRefs.current = [...Array(sections.length).keys()].map(
+        (_, i) => sectionRefs.current[i] ?? createRef()
+    );
+
     const containerRef = useRef<HTMLDivElement>(null) as React.MutableRefObject<HTMLDivElement>;
     const [bind, unbind] = useScrollSnap(
         containerRef,
-        { snapDestinationY: "100vh" }
+        {
+            snapDestinationY: "100vh",
+            timeout: 0.001,
+            threshold: 0.1,
+            easing: easeOutQuint
+        }
     );
 
-    const onScroll = (event: WheelEvent) => {
+    /* const downOnClick: MouseEventHandler<HTMLAnchorElement> = useCallback((index) => {
         if (containerRef.current) {
-            switch (event.deltaMode) {
-                case 0:
-                    containerRef.current.scrollTop += event.deltaY;
-                    containerRef.current.scrollLeft += event.deltaX;
-                    break;
-                case 1:
-                    containerRef.current.scrollTop += 8*event.deltaY;
-                    containerRef.current.scrollLeft += 8*event.deltaX;
-                    break;
-                case 2:
-                    containerRef.current.scrollTop += 0.03*event.deltaY;
-                    containerRef.current.scrollLeft += 0.03*event.deltaX;
-                    break;
-            }
-            event.stopPropagation();
-            event.preventDefault();
+            window.scrollTo({
+                top: containerRef.current.clientHeight,
+                behavior: "smooth"
+            });
         }
-    };
-
-    /* 
-        -------------------------------------------------------------------
-        pointer-events-none
-        -------------------------------------------------------------------
-
-        useEffect(() => {
-            document.addEventListener("wheel", onScroll);
-            return () => document.removeEventListener("wheel", onScroll);
-        }, [containerRef.current]); 
-    */
+    }, [containerRef.current]); */
 
     return (
         <>

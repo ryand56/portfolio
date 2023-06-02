@@ -9,6 +9,9 @@ module.exports = {
         "bounce-slow": "bounce 1.5s infinite"
       }
     },
+    screens: {
+      md: {"min": "895px"}
+    }
   },
   plugins: [],
 }

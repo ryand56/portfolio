@@ -23,6 +23,9 @@ dependencies:
   react-icons:
     specifier: ^4.9.0
     version: 4.9.0(react@18.2.0)
+  react-tippy:
+    specifier: ^1.4.0
+    version: 1.4.0
   scroll-snap:
     specifier: ^4.0.3
     version: 4.0.3
@@ -623,6 +626,11 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
+  /popper.js@1.16.1:
+    resolution: {integrity: sha512-Wb4p1J4zyFTbM+u6WuO4XstYx4Ky9Cewe4DWrel7B0w6VVICvPwdOpotjzcf6eD8TsckVnIMNONQyPIUFOUbCQ==}
+    deprecated: You can find the new Popper v2 at @popperjs/core, this package is dedicated to the legacy v1
+    dev: false
+
   /postcss-import@14.1.0(postcss@8.4.21):
     resolution: {integrity: sha512-flwI+Vgm4SElObFVPpTIT7SU7R3qk2L7PyduMcokiaVKuWv9d/U+Gm/QAd8NDLuykTWTkcrjOeD2Pp1rMeBTGw==}
     engines: {node: '>=10.0.0'}
@@ -727,6 +735,12 @@ packages:
       react: '*'
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /react-tippy@1.4.0:
+    resolution: {integrity: sha512-r/hM5XK9Ztr2ZY7IWKuRmISTlUPS/R6ddz6PO2EuxCgW+4JBcGZRPU06XcVPRDCOIiio8ryBQFrXMhFMhsuaHA==}
+    dependencies:
+      popper.js: 1.16.1
     dev: false
 
   /react@18.2.0:

@@ -14,6 +14,5 @@ interface ScrollSnapOptions {
     orientation?: "vertical" | "horizontal";
 }
 
-const ScrollSnapWrapper = () => {
-
-};
+const ScrollSnapWrapper = () => null; // WIP
+export default ScrollSnapWrapper;

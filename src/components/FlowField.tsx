@@ -73,6 +73,8 @@ const initCanvas = (canvas: HTMLCanvasElement, color?: string[]) => {
     draw(ctx, canvas, particles, 0);
 };
 
+const random = (min: number, max: number) => Math.floor(Math.random() * (max - min)) + min;
+
 interface FlowFieldProps {
     style?: React.CSSProperties;
     className?: string;
@@ -80,9 +82,11 @@ interface FlowFieldProps {
 };
 
 const FlowField = ({ style, className, color }: FlowFieldProps) => {
+    const canvasHolder = React.useRef<HTMLDivElement>(null) as React.MutableRefObject<HTMLDivElement>;
     const canvas = React.useRef<HTMLCanvasElement>(null) as React.MutableRefObject<HTMLCanvasElement>;
-    
-    const canvasOnClick = () => {
+    const tickTimeoutId = React.useRef<number | undefined>(undefined);
+
+    const canvasNoise = () => {
         noiseGen = mkSimplexNoise(Math.random);
     };
     
@@ -90,22 +94,38 @@ const FlowField = ({ style, className, color }: FlowFieldProps) => {
         setupCanvas(canvas.current);
     };
 
+    const handleTick = () => {
+        const nextTickAt = random(6000, 8000);
+        tickTimeoutId.current = window.setTimeout(() => {
+            canvasNoise();
+            handleTick();
+        }, nextTickAt);
+    };
+
     React.useEffect(() => {
-        if (canvas.current) {
+        if (canvasHolder.current && canvas.current) {
             initCanvas(canvas.current, color);
-            canvas.current.addEventListener("click", canvasOnClick);
+            canvasHolder.current.addEventListener("click", canvasNoise);
+            canvas.current.addEventListener("click", canvasNoise);
+            handleTick();
+
             window.addEventListener("resize", windowResize);
         }
 
         return () => {
-            if (canvas.current) {
-                canvas.current.removeEventListener("click", canvasOnClick);
+            if (canvasHolder.current && canvas.current) {
+                canvasHolder.current.removeEventListener("click", canvasNoise);
+                canvas.current.removeEventListener("click", canvasNoise);
+                clearTimeout(tickTimeoutId.current);
+
                 window.removeEventListener("resize", windowResize);
             }
         };
     }, [canvas]);
 
-    return <canvas ref={canvas} style={style} className={className} />;
+    return <div ref={canvasHolder} id="flow-field-background" className="absolute left-0 top-0 min-w-full max-w-full min-h-full max-h-full">
+        <canvas ref={canvas} style={style} className={className} />
+    </div>;
 };
 
 export default FlowField;

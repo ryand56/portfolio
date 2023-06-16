@@ -11,22 +11,20 @@ const Layout = ({ children }: LayoutProps) => (
     <>
         <Head>
             <meta charSet="UTF-8" />
-            <title>Ryan Omasta</title>
+            <title>Ryan O.</title>
             <meta name="viewport" content="width=device-width,initial-scale=1" />
             <link rel="shortcut icon" type="image/png" href="https://dcdn.dstn.to/avatars/660292639412846621.png" />
             <meta name="theme-color" content="#000000" />
             <meta
                 name="keywords"
-                content="ryand, Ryan Omasta, Ryan, Omasta, web developer, software developer, github, javascript"
+                content="ryand, Ryan O., Ryan, O., web developer, software developer, github"
             />
-            <meta name="description" content="Ryan Omasta - Software/Web Developer" />
-            <meta name="author" content="Ryan Omasta" />
+            <meta name="description" content="Ryan O - Software/Web Developer" />
+            <meta name="author" content="Ryan O" />
         </Head>
+        <FlowField className="fixed -z-20 w-full h-full" />
         <PresenceContextProvider>
-            <div>
-                <FlowField className="absolute -z-20 top-0 left-0 right-0 bottom-0 w-full h-full" />
-                {children}
-            </div>
+            {children}
         </PresenceContextProvider>
     </>
 );

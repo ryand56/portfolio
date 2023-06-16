@@ -56,7 +56,7 @@ const IntroSection = ({ presence }: IntroSectionProps) => { // m-4 mb-14 md:m-14
                 <CircleStatus data={presence} />
             </div>
             <div className="absolute md2:bottom-[42px] right-12 flex flex-row space-x-3 justify-center items-center">
-                <a href="https://github.com/elementemerald" target="_blank">
+                <a href="https://github.com/ryand56" target="_blank">
                     <FaGithub />
                 </a>
                 <a href="https://git.ryand.ca" target="_blank">

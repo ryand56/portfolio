@@ -88,7 +88,7 @@ const Home = () => {
                     </div>
                     <div id="pc-specs-cpu" className="flex flex-row space-x-1">
                         <div id="pc-specs-cpu-title" className="text-sm font-semibold">CPU</div>
-                        <div id="pc-specs-cpu-info" className="text-sm font-light">AMD Ryzen 5 5600X</div>
+                        <div id="pc-specs-cpu-info" className="text-sm font-light">AMD Ryzen 7 5800X3D</div>
                     </div>
                     <div id="pc-specs-gpu" className="flex flex-row space-x-1">
                         <div id="pc-specs-gpu-title" className="text-sm font-semibold">GPU</div>

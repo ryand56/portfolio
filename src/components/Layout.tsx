@@ -21,6 +21,7 @@ const Layout = ({ children }: LayoutProps) => (
             />
             <meta name="description" content="Ryan O - Software/Web Developer" />
             <meta name="author" content="Ryan O" />
+            <meta name="robots" content="noindex" />
         </Head>
         <FlowField className="fixed -z-20 w-full h-full" />
         <PresenceContextProvider>
